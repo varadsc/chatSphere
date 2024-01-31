@@ -13,7 +13,7 @@ function App() {
         <Route path="/login" element={<>welcome to login page</>}></Route>
 
         <Route path='/' element={<PageLayout />}>
-            <Route path='/' element={<>hi</>}></Route>
+            <Route path='/' element={<div className='bg-primary'>hi</div>}></Route>
             <Route path="/home" element={<>welcome to Home page</>}></Route>  
 
 
@@ -21,6 +21,16 @@ function App() {
 
 
       </Routes>
+          {/* <div className="d-flex bg-warning" style={{height :'500px', backgroundColor:'red'}} >
+            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
+            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
+            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
+            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
+            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
+          </div> */}
+
+
+      
     </>
   )
 }
