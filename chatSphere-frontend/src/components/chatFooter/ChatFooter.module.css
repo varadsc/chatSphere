@@ -1,0 +1,14 @@
+.InputBox
+{
+    height: 45px;
+    width: 90%;
+    padding: 0.1rem 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid #a7adb4;
+    border-radius: 10px;
+
+}
+
+.InputBox:focus{
+    outline: none;
+}

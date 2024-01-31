@@ -4,6 +4,7 @@ import {Route, Routes} from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { PageLayout } from './layouts/PageLayout'
+import { Homepage } from './components/homepage/Homepage'
 
 function App() {
 
@@ -11,14 +12,13 @@ function App() {
     <>
       <Routes>
         <Route path="/login" element={<>welcome to login page</>}></Route>
+        <Route path="/signup" element={<>welcome to signup page</>}></Route>
 
         <Route path='/' element={<PageLayout />}>
-            <Route path='/' element={<div className='bg-primary'>hi</div>}></Route>
-            <Route path="/home" element={<>welcome to Home page</>}></Route>  
-
+            <Route path='/' element={<Homepage />}></Route>
+            <Route path="/about" element={<>welcome to Home page</>}></Route>  
 
         </Route>
-
 
       </Routes>
           {/* <div className="d-flex bg-warning" style={{height :'500px', backgroundColor:'red'}} >

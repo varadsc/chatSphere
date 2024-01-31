@@ -9,7 +9,7 @@ export const PageLayout = () => {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow:'hidden'}}>
           <Navbar />
           <div style={{ display: 'flex', height:'100%' }}>
-            <div className="col-2 m-0 mx-1 p-1" style={{backgroundColor: '#f0f5f5'}}>
+            <div className="col-2 m-0 p-1" style={{backgroundColor: '#f0f5f5'}}>
               <Sidebar />
             </div>
             <div className='col m-0 p-0'>
