@@ -1,4 +1,10 @@
 .sidebar
 {
-    overflow: hidden scroll;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.card
+{
+    text-align: center;
 }
