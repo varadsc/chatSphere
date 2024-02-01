@@ -8,9 +8,9 @@ export const Homepage = () => {
         {/* <div> */}
             <ChatHeader />
         {/* </div> */}
-        <div style={{flex: 0.87, backgroundColor : '#f0f5f5'}}  >
+        <div style={{flex: 1, backgroundColor : '#f0f5f5'}}  >
         </div>
-        <div className='p-2' style={{flex: 0.13, backgroundColor : '#f0f5f5'}}>
+        <div className='p-3' style={{position:'fixed', bottom :'0' ,width:'95%' }}>
            <ChatFooter />
         </div>
     </div>
