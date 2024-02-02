@@ -15,7 +15,7 @@ export const Sidebar = () => {
         <>
         {sidebarData?.map((userChat, index) =>(
                 // <div className={`w-100 my-2 ${SidbarStyles.card}`}>
-                    <div key={index} className={`row my-2 mx-0 p-1`} style={selectedChat === index ? {backgroundColor:'#d1e0e0', borderRadius :'5px'} :{borderRadius :'5px'}}>
+                    <div key={index} className={`row my-1 mx-0 p-1`} style={selectedChat === index ? {backgroundColor:'#F1F4F9', borderRadius :'5px'} :{borderRadius :'5px'}}>
                         <div className="col-2 me-3 m-0 p-0">
                             <Avatar className='my-2' size="large" icon={<UserOutlined />} />
                         </div>

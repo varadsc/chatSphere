@@ -1,6 +1,7 @@
 import React from 'react'
 import { ChatHeader } from '../chatHeading/ChatHeader'
 import { ChatFooter } from '../chatFooter/ChatFooter'
+import { ChatBody } from '../chatBody/ChatBody'
 
 export const Homepage = () => {
   return (
@@ -8,13 +9,11 @@ export const Homepage = () => {
         {/* <div> */}
             <ChatHeader />
         {/* </div> */}
-        <div style={{flex: 1, backgroundColor : '#f0f5f5'}}  >
-        </div>
+        <ChatBody />       
+        
         <div className='p-3' style={{position:'fixed', bottom :'0' ,width:'95%' }}>
            <ChatFooter />
         </div>
     </div>
-
-
   )
 }

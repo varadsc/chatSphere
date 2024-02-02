@@ -17,20 +17,9 @@ function App() {
         <Route path='/' element={<PageLayout />}>
             <Route path='/' element={<Homepage />}></Route>
             <Route path="/about" element={<>welcome to Home page</>}></Route>  
-
         </Route>
 
       </Routes>
-          {/* <div className="d-flex bg-warning" style={{height :'500px', backgroundColor:'red'}} >
-            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
-            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
-            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
-            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
-            <div className='m-2 p-2 bg-primary' style={{height:'100px'}}>hi</div>
-          </div> */}
-
-
-      
     </>
   )
 }

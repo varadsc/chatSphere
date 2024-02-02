@@ -4,6 +4,15 @@
     overflow-y: auto;
 }
 
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 .card
 {
     text-align: center;
