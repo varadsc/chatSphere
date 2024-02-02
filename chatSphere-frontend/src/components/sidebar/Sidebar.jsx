@@ -15,13 +15,13 @@ export const Sidebar = () => {
         <>
         {sidebarData?.map((userChat, index) =>(
                 // <div className={`w-100 my-2 ${SidbarStyles.card}`}>
-                    <div key={index} className={`row my-2 mx-0 p-1`} style={selectedChat === index ? {backgroundColor:'#c2d6d6'} :{}}>
+                    <div key={index} className={`row my-2 mx-0 p-1`} style={selectedChat === index ? {backgroundColor:'#d1e0e0', borderRadius :'5px'} :{borderRadius :'5px'}}>
                         <div className="col-2 me-3 m-0 p-0">
                             <Avatar className='my-2' size="large" icon={<UserOutlined />} />
                         </div>
                         <div className="col m-0 p-0">
-                            <p className='m-0' style={{fontWeight :'700', fontSize:'0.9rem'}}>{userChat.userName}</p> 
-                            <p className='m-0' style={{fontSize:'0.7rem'}}>You: Hi ?</p>
+                            <p className='mt-1 m-0' style={{fontWeight :'700', fontSize:'0.9rem'}}>{userChat.userName}</p> 
+                            <p className='mt-1 m-0' style={{fontSize:'0.7rem'}}>You: Hi ?</p>
                         </div>
                     </div>
                     

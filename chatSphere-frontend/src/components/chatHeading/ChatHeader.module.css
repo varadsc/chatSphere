@@ -1,0 +1,7 @@
+.heading
+{
+   background-color: #d1e0e0 ;
+   display: flex;
+   justify-content: space-between;
+   /* align-items: center; */
+}
