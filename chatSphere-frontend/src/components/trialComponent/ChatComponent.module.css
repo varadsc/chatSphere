@@ -1,0 +1,81 @@
+.chatApp {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.chatApp .no-content-message {
+    color: #ccc;
+    font-style: italic;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px;
+}
+.chatApp .channel-list {
+    width: calc(20% - 12px);
+    border: 1px solid #e0e0e0;
+    margin: 10px;
+    margin-right: 0;
+    border-right: none;
+    height: calc(100% - 22px);
+}
+.chatApp .channel-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
+}
+.chatApp .channel-item div {
+    font-weight: bold;
+}
+.chatApp .channel-item span {
+    font-size: 10px;
+}
+.chatApp .channel-item:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+.chatApp .messages-panel {
+    width: calc(80% - 12px);
+    border: 1px solid #e0e0e0;
+    margin: 10px;
+    margin-left: 0;
+    height: calc(100% - 22px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.chatApp .messages-panel .meesages-list {
+    align-self: stretch;
+    height: 100%;
+}
+.chatApp .messages-panel .messages-input {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
+    display: flex;
+}
+.chatApp .messages-panel .messages-input input {
+    margin: auto;
+    height: 20px;
+    width: 100%;
+    margin-left: 15px;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+}
+.chatApp .messages-panel .messages-input input:focus {
+    border-radius: 15px;
+    border: 2px solid #66a6ff;
+    outline: none;
+}
+.chatApp .messages-panel .messages-input button {
+    width: 60px;
+    margin: auto 10px;
+    background-color: #0e62da;
+    color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 5px 13px;
+}
+.chatApp .messages-panel .messages-input button:hover {
+    cursor: pointer;
+    background-color: #66a6ff;
+}

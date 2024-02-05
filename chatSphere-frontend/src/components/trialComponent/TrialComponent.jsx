@@ -16,20 +16,20 @@ export const TrialComponent = () => {
     // });
 
     
-    useEffect(() => {
+    // useEffect(() => {
         
-        // socket.on('connection', () => {
-        //     console.log(`I'm connected with the back-end`);
-        // });
+    //     // socket.on('connection', () => {
+    //     //     console.log(`I'm connected with the back-end`);
+    //     // });
 
-        const socket = io('http://localhost:3300');
+    //     const socket = io('http://localhost:3300');
 
-        // Event listener for the 'connection' event
-        socket.on('connection', (data) => {
-        console.log('Connected to the server:', data);
-    });
+    //     // Event listener for the 'connection' event
+    //     socket.on('connection', (data) => {
+    //     console.log('Connected to the server:', data);
+    // });
 
-    }, [])
+    // }, [])
 
   return (
     <div> Trial component ui </div>
