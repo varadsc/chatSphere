@@ -1,18 +1,22 @@
 import React from 'react'
 
-export const ChannelComponent = ({keyval, id, name, participants, onSelect, getChannelList}) => {
+export const ChannelComponent = ({id, name, participants, onClick}) => {
 
-    const handleClick = (id) => {
-        console.log('chat selected for id ' , id);
-        onSelect(id);
-        getChannelList();
-    }
+    // const handleClick = (id) => {
+    //     console.log('chat selected for id ' , id);
+    //     onSelect(id);
+    //     getChannelList();
+    // }
+
+    const handleClick = () => {
+      onClick(id);
+  }
 
   return (
     <div>
-        <div className="channel-item" key={keyval} onClick={() => handleClick(id)}>
+         <div className='channelItem' onClick={handleClick}>
             <div>{name}</div>
-            <span>{participants ? participants :0}</span>
+            <span>{participants}</span>
         </div>
     </div>
   )

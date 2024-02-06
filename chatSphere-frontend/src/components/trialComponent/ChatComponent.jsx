@@ -4,18 +4,22 @@ import Styles from './ChatComponent.module.css'
 import { MessagePanel } from './MessagePanel';
 import axios from 'axios';
 
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import socketClient from "socket.io-client";
+
+const SERVER = 'http://localhost:3300';
 
 export const ChatComponent = () => {
 
     const [channels,setChannels] =useState([
         // { id: 1, name: 'first', participants: 10 }
     ]);
-    const socket = io('http://localhost:3300');
+    // const socket = io('http://localhost:3300');
 
 
     const [channel, setChannel] = useState('')
-    const [socketSelected, setSocketSelected] = useState('');
+    // const [socketSelected, setSocketSelected] = useState('');
+    const [socket, setSocket] = useState(null);
 
     // var socket = socketClient (SERVER);
     // const socket = io('http://localhost:3300');
@@ -23,16 +27,21 @@ export const ChatComponent = () => {
     //     console.log(`I'm connected with the back-end`);
     // });
     
-    const getChannelList = async() => {
+    const loadChannels = async() => {
         const res = await axios.get('http://localhost:3300/getChannels');
         console.log('checking ' , res);
         setChannels(res.data.channels)
     }
+    // useEffect(() => {
+    //     getChannelList();
+    //     configureSocket();
+    //     console.log('useeffect called');
+    // }, [])
+
     useEffect(() => {
-        getChannelList();
+        loadChannels();
         configureSocket();
-        console.log('useeffect called');
-    }, [])
+      }, []);
 
     // useEffect(() => {
     //     console.log('channellll' , channel);
@@ -47,67 +56,102 @@ export const ChatComponent = () => {
     //     this.socket.emit('channel-join', id, ack => {
     //     });
     // }
-    const onSelect = (id) => {
-        console.log('jhsidf', id);
-        setChannel(id);
-        socket.emit('channel-join', id, ack => {
-        });
-    }
+    // const onSelect = (id) => {
+    //     console.log('jhsidf', id);
+    //     setChannel(id);
+    //     socket.emit('channel-join', id, ack => {
+    //     });
+    // }
+
+    const handleChannelSelect = id => {
+        const selectedChannel = channels.find(c => c.id === id);
+        setChannel(selectedChannel);
+        socket.emit('channel-join', id, ack => {});
+      };
+
+
+    // const configureSocket = () => {
+    //     // var socket = socketClient(SERVER);
+    //     socket.on('connection', () => {
+    //         if (channel) {
+    //             onselect(channel.id);
+    //         }
+    //     });
+    //     socket.on('channel', channel => {
+            
+    //         console.log('channel on socket called');
+    //         // let channels = this.state.channels;
+    //         channels?.forEach(c => {
+    //             if (c.id === channel.id) {
+    //                 c.participants = channel.participants;
+    //             }
+    //         });
+    //         console.log('jjjj' ,channels);
+    //         // this.setState({ channels });
+    //     });
+    //     socket.on('message', message => {
+            
+    //         // let channels = this.state.channels
+    //         const channelsUpdated = channels?.forEach(c => {
+    //             if (c.id === message.channel_id) {
+    //                 if (!c.messages) {
+    //                     c.messages = [message];
+    //                 } else {
+    //                     c.messages.push(message);
+    //                 }
+    //             }
+    //         });
+    //         console.log(channelsUpdated, 'updated channels')
+    //         // this.setState({ channels });
+    //     });
+    //     // this.socket = socket;
+    //     console.log('sleected socket ' ,socket);
+    //     setSocketSelected(socket)
+    // }
 
     const configureSocket = () => {
-        // var socket = socketClient(SERVER);
-        socket.on('connection', () => {
-            if (channel) {
-                onselect(channel.id);
-            }
-        });
-        socket.on('channel', channel => {
-            
-            console.log('channel on socket called');
-            // let channels = this.state.channels;
-            channels?.forEach(c => {
-                if (c.id === channel.id) {
-                    c.participants = channel.participants;
-                }
-            });
-            console.log('jjjj' ,channels);
-            // this.setState({ channels });
-        });
-        socket.on('message', message => {
-            
-            // let channels = this.state.channels
-            const channelsUpdated = channels.forEach(c => {
-                if (c.id === message.channel_id) {
-                    if (!c.messages) {
-                        c.messages = [message];
-                    } else {
-                        c.messages.push(message);
-                    }
-                }
-            });
-            console.log(channelsUpdated, 'updated channels')
-            // this.setState({ channels });
-        });
-        // this.socket = socket;
-        console.log('sleected socket ' ,socket);
-        setSocketSelected(socket)
-    }
-
-    const handleSendMessage = (channel_id, text) => {
-        socket.emit('send-message', { channel_id, text, senderName: socket, id: Date.now() });
-    }
+        const newSocket = socketClient(SERVER);
     
+        newSocket.on('connection', () => {
+          if (channel) {
+            handleChannelSelect(channel.id);
+          }
+        });
+    
+        newSocket.on('channel', newChannel => {
+          const updatedChannels = channels.map(c => (c.id === newChannel.id ? { ...c, participants: newChannel.participants } : c));
+          setChannels(updatedChannels);
+        });
+    
+        newSocket.on('message', message => {
+          const updatedChannels = channels.map(c => {
+            if (c.id === message.channel_id) {
+              c.messages = c.messages ? [...c.messages, message] : [message];
+            }
+            return c;
+          });
+          setChannels(updatedChannels);
+        });
+    
+        setSocket(newSocket);
+      };
+
+    // const handleSendMessage = (channel_id, text) => {
+    //     // socket.emit('send-message', { channel_id, text, senderName: socket, id: Date.now() });
+    //     socket.emit('send-message', { data : 'hello' });
+    // }
+    
+    const handleSendMessage = (channel_id, text) => {
+        socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
+      };
 
   
     return (
-    <div>
 
     <div className={Styles.chatApp}>
-        <ChannelListComponent channels={channels} setChannels={setChannels} onSelect={onSelect} getChannelList={getChannelList} />
-        <MessagePanel channel={channel} handleSendMessage={handleSendMessage}/>
-            </div>
-
-
+        <ChannelListComponent channels={channels} setChannels={setChannels} onSelectChannel={handleChannelSelect} />
+        <MessagePanel channel={channel} onSendMessage={handleSendMessage}/>
     </div>
+
   )
 }
