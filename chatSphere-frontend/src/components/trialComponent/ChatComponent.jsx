@@ -9,17 +9,16 @@ import socketClient from "socket.io-client";
 
 const SERVER = 'http://localhost:3300';
 
-export const ChatComponent = () => {
+export const ChatComponent = ({channels,setChannels, channel, setChannel, socket, setSocket}) => {
 
-    const [channels,setChannels] =useState([
-        // { id: 1, name: 'first', participants: 10 }
-    ]);
+    // const [channels,setChannels] =useState([
+    //     // { id: 1, name: 'first', participants: 10 }
+    // ]);
     // const socket = io('http://localhost:3300');
 
-
-    const [channel, setChannel] = useState('')
+    
     // const [socketSelected, setSocketSelected] = useState('');
-    const [socket, setSocket] = useState(null);
+    
 
     // var socket = socketClient (SERVER);
     // const socket = io('http://localhost:3300');
@@ -27,21 +26,23 @@ export const ChatComponent = () => {
     //     console.log(`I'm connected with the back-end`);
     // });
     
-    const loadChannels = async() => {
-        const res = await axios.get('http://localhost:3300/getChannels');
-        console.log('checking ' , res);
-        setChannels(res.data.channels)
-    }
+    
     // useEffect(() => {
     //     getChannelList();
     //     configureSocket();
     //     console.log('useeffect called');
     // }, [])
 
+    
+      
     useEffect(() => {
-        loadChannels();
-        configureSocket();
-      }, []);
+      console.log('called');
+      configureSocket();
+    }, [channel])
+
+      // useEffect(() => {
+      //   console.log('values of channels ' , channels , ' one channel ' , channel , 'and socket is ' , socket);
+      // }, [channel,channels,socket])
 
     // useEffect(() => {
     //     console.log('channellll' , channel);
@@ -63,7 +64,7 @@ export const ChatComponent = () => {
     //     });
     // }
 
-    const handleChannelSelect = id => {
+    const handleChannelSelect = (id) => {
         const selectedChannel = channels.find(c => c.id === id);
         setChannel(selectedChannel);
         socket.emit('channel-join', id, ack => {});
@@ -119,7 +120,13 @@ export const ChatComponent = () => {
         });
     
         newSocket.on('channel', newChannel => {
-          const updatedChannels = channels.map(c => (c.id === newChannel.id ? { ...c, participants: newChannel.participants } : c));
+          // const updatedChannels = channels.map(c => (c.id === newChannel.id ? { ...c, participants: newChannel.participants } : c));
+          const updatedChannels = channels?.forEach(c => {
+            if (c.id === channel.id) {
+                c.participants = channel.participants;
+            }
+        });
+        // console.log('yyyy' , updatedChannels);
           setChannels(updatedChannels);
         });
     

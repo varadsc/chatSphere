@@ -1,4 +1,5 @@
 import React from 'react'
+import Styles from './ChatComponent.module.css'
 
 export const ChannelComponent = ({id, name, participants, onClick}) => {
 
@@ -14,7 +15,7 @@ export const ChannelComponent = ({id, name, participants, onClick}) => {
 
   return (
     <div>
-         <div className='channelItem' onClick={handleClick}>
+         <div className={Styles.channelItem} onClick={handleClick}>
             <div>{name}</div>
             <span>{participants}</span>
         </div>

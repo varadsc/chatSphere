@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Message } from './Message'
+import Styles from './ChatComponent.module.css'
 
 export const MessagePanel = ({ channel, onSendMessage }) => {
 
@@ -16,16 +17,16 @@ export const MessagePanel = ({ channel, onSendMessage }) => {
         setInputValue(e.target.value);
     };
 
-    let list = <div className="noContentMessage">There are no messages to show</div>;
+    let list = <div className={Styles.noContentMessage}>There are no messages to show</div>;
     if (channel && channel.messages) {
         list = channel.messages.map(m => <Message key={m.id} id={m.id} senderName={m.senderName} text={m.text} />);
     }
 
   return (
-    <div className='messagesPanel'>
-            <div className="messages-list">{list}</div>
+    <div className={Styles.messagesPanel}>
+            <div className={Styles.messagesList}>{list}</div>
             {channel &&
-                <div className="messagesInput">
+                <div className={Styles.messagesInput}>
                     <input type="text" onChange={handleInput} value={inputValue} />
                     <button onClick={send}>Send</button>
                 </div>

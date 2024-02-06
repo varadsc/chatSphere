@@ -1,5 +1,6 @@
 import React from 'react'
 import { ChannelComponent } from './ChannelComponent'
+import Styles from './ChatComponent.module.css'
 
 export const ChannelListComponent = ({channels, setChannels, onSelectChannel , getChannelList}) => {
 
@@ -7,15 +8,22 @@ export const ChannelListComponent = ({channels, setChannels, onSelectChannel , g
     onSelectChannel(id);
 }
 
-let list = <div className="noContentMessage">There is no channels to show</div>;
-if (channels && channels.map) {
-    list = channels.map(c => <ChannelComponent key={c.id} id={c.id} name={c.name} participants={c.participants} onClick={handleClick} />);
-}
+// let list = <div className={Styles.noContentMessage}>There is no channels to show</div>;
+// if (channels && channels.map) {
+//     list = channels.map(c => <ChannelComponent key={c.id} id={c.id} name={c.name} participants={c.participants} onClick={handleClick} />);
+// }
 
   return (
 
-    <div className='channelList'>
-            {list}
+    <div className={Styles.channelList}>
+            {/* {list} */}
+            {
+              channels?.length <= 0 ? <div className={Styles.noContentMessage}>There is no channels to show</div> :
+                channels?.map((c) => (
+                  <ChannelComponent key={c.id} id={c.id} name={c.name} participants={c.participants} onClick={handleClick} />
+                ))
+            }
+
         </div>
 
         

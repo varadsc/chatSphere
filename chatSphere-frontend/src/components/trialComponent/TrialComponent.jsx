@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import socketClient  from "socket.io-client";
-const SERVER = "http://localhost:3300/socket.io/";
-import io from 'socket.io-client';
+// const SERVER = "http://localhost:3300/socket.io/";
+// import io from 'socket.io-client';
 
 
 export const TrialComponent = () => {
+
+  const [channel, setChannel] = useState([])
 
     // const socket = socketClient (SERVER);
 
