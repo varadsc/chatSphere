@@ -7,7 +7,7 @@ import SidbarStyles from './Sidebar.module.css'
 
 export const Sidebar = () => {
   
-    console.log('sidebar is' , sidebarData);
+    // console.log('sidebar is' , sidebarData);
     const [selectedChat , setSelectedChat] = useState(1);
 
     return (

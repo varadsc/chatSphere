@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import {Route, Routes} from 'react-router-dom'
 import viteLogo from '/vite.svg'
@@ -13,30 +13,32 @@ import axios from 'axios'
 
 function App() {
 
-  const [channels, setChannels] = useState([])
-  const [channel, setChannel] = useState('')
-  const [socket, setSocket] = useState(null);
+  // const [channels, setChannels] = useState([])
+  // const [channel, setChannel] = useState('')
+  // const [socket, setSocket] = useState(null);
 
-  const loadChannels = async() => {
-    const res = await axios.get('http://localhost:3300/getChannels');
-    setChannels(res.data.channels)
-  }
-    useEffect(() => {
-      loadChannels();
-    }, []);
+  // const messages = useRef([]);
+  const [messages, setMessages] =useState([])
+
+  // const loadChannels = async() => {
+  //   const res = await axios.get('http://localhost:3300/getChannels');
+  //   setChannels(res.data.channels)
+  // }
+  //   useEffect(() => {
+  //     loadChannels();
+  //   }, []);
 
   return (
     <>
       <Routes>
         <Route path="/login" element={<>welcome to login page</>}></Route>
         <Route path="/signup" element={<>welcome to signup page</>}></Route>
-        <Route path='/trial' element={<TrialComponent />}></Route>
         {/* <Route path='/trial/channel' element={<ChannelComponent />}></Route> */}
         {/* <Route path='/trial/channelList' element={<ChannelListComponent />}></Route> */}
-        <Route path='/trial/chat' element={<ChatComponent socket={socket} setSocket={setSocket} loadChannels={loadChannels}  channels={channels} setChannels={setChannels} channel={channel} setChannel={setChannel} />}></Route>
+        {/* <Route path='/trial/chat' element={<ChatComponent socket={socket} setSocket={setSocket} loadChannels={loadChannels}  channels={channels} setChannels={setChannels} channel={channel} setChannel={setChannel} />}></Route> */}
 
         <Route path='/' element={<PageLayout />}>
-            <Route path='/' element={<Homepage />}></Route>
+            <Route path='/' element={<Homepage messages={messages} setMessages={setMessages} />}></Route>
             <Route path="/about" element={<>welcome to Home page</>}></Route>  
         </Route>
 
