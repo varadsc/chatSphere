@@ -38,7 +38,7 @@ export const ChatComponent = ({channels,setChannels, channel, setChannel, socket
     useEffect(() => {
       console.log('called');
       configureSocket();
-    }, [channel])
+    }, [])
 
       // useEffect(() => {
       //   console.log('values of channels ' , channels , ' one channel ' , channel , 'and socket is ' , socket);
