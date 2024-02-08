@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import Styles from './ChatFooter.module.css'
 import { SendOutlined } from '@ant-design/icons'
 
-export const ChatFooter = ({newSocket}) => {
+export const ChatFooter = ({newSocket,messages, setMessages}) => {
 
   const [messageInput, setMessageInput] =useState('')
 
   const submitMessage =() =>{
     if(messageInput)
     {
-      newSocket.emit('get-message' , {message :messageInput, id : newSocket.id})
+      newSocket?.emit('get-message' , messageInput)
+      setMessages((messages) => [...messages, messageInput]);
       setMessageInput('');
     }
   }
