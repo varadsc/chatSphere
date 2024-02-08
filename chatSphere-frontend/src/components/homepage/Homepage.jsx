@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ChatHeader } from '../chatHeading/ChatHeader'
 import { ChatFooter } from '../chatFooter/ChatFooter'
 import { ChatBody } from '../chatBody/ChatBody'
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 
-export const Homepage = ({messages, setMessages, newSocket}) => {
+export const Homepage = ({messages, setMessages}) => {
 
   // const [messageInput, setMessageInput] =useState('')'
   // const [messages,setMessages] = useState();
@@ -12,6 +12,25 @@ export const Homepage = ({messages, setMessages, newSocket}) => {
   useEffect(() => {
     console.log('msssss' ,messages);
   }, [messages])
+
+
+  const newSocket = useMemo(() => io('http://localhost:3300'),[])
+
+  useEffect(() => {
+    newSocket?.on("connect" , () => {
+      console.log('socket with id ' , newSocket.id ,'connected');
+    })
+
+    newSocket?.on('send-message' , (message) => {
+      console.log('recieved message ' , message);
+      setMessages((messages) => [...messages, message]);
+    })
+
+    return () => {
+      socket.disconnect();
+    };
+
+  }, [])
 
   // useEffect(() => {
   //   console.log('message is  , ', messages);

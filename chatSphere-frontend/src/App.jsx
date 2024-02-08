@@ -10,7 +10,8 @@ import { ChannelListComponent } from './components/trialComponent/ChannelListCom
 import { ChannelComponent } from './components/trialComponent/ChannelComponent'
 import { ChatComponent } from './components/trialComponent/ChatComponent'
 import axios from 'axios'
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
+import { LoginPage } from './pages/LoginPage'
 
 function App() {
 
@@ -20,23 +21,7 @@ function App() {
   const [messages, setMessages] =useState([])
   
   // const newSocket = useMemo(() => io('http://localhost:3300'))
-  const newSocket = useMemo(() => io('http://localhost:3300'),[])
-
-  useEffect(() => {
-    newSocket?.on("connect" , () => {
-      console.log('socket with id ' , newSocket.id ,'connected');
-    })
-
-    newSocket?.on('send-message' , (message) => {
-      console.log('recieved message ' , message);
-      setMessages((messages) => [...messages, message]);
-    })
-
-    return () => {
-      socket.disconnect();
-    };
-
-  }, [])
+  
 
   // useEffect(() => {
   //   console.log('msss' , messages);
@@ -57,14 +42,14 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<>welcome to login page</>}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<>welcome to signup page</>}></Route>
         {/* <Route path='/trial/channel' element={<ChannelComponent />}></Route> */}
         {/* <Route path='/trial/channelList' element={<ChannelListComponent />}></Route> */}
         {/* <Route path='/trial/chat' element={<ChatComponent socket={socket} setSocket={setSocket} loadChannels={loadChannels}  channels={channels} setChannels={setChannels} channel={channel} setChannel={setChannel} />}></Route> */}
 
         <Route path='/' element={<PageLayout />}>
-            <Route path='/chat' element={<Homepage messages={messages} setMessages={setMessages} newSocket={newSocket} />}></Route>
+            <Route path='/chat' element={<Homepage messages={messages} setMessages={setMessages} />}></Route>
             <Route path="/about" element={<>welcome to Home page</>}></Route>  
         </Route>
 
