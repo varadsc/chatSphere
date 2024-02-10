@@ -1,12 +1,18 @@
 import React from 'react'
 import Styles from './LoginPage.module.css'
+import Cookies from 'js-cookie'
 import { Button, Checkbox, Form, Input } from 'antd';
-
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
 
+  const navigate = useNavigate()
+
   const onFinish = (values) => {
     console.log('Success:', values);
+    Cookies.set('email' , values.email)
+    Cookies.set('name' , values.name)
+    navigate('/chat')
   };
 
   return (

@@ -3,5 +3,6 @@
    /* background-color: #d1e0e0 ; */
    display: flex;
    justify-content: space-between;
+   border-bottom: 1px solid #DFE2E7;
    /* align-items: center; */
 }
