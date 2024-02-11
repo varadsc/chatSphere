@@ -10,6 +10,8 @@ const app = express();
 
 const server = createServer(app);
 
+let connectedUsersList = [];
+
 const io = new Server(server , {
   cors: {
     origin: ['http://localhost:5173', 'http://localhost:5174' ], 
@@ -35,6 +37,12 @@ io.on("connection" ,(socket) => {
   socket.on('get-message', (message) => {
     console.log('sent by' , socket.id);
     socket.broadcast.emit('send-message' ,message)
+  })
+
+  socket.on('add-connected-user', (userInfo) => {
+    connectedUsersList.push(userInfo)
+    console.log(connectedUsersList, 'list');
+    socket.emit('send-all-users', connectedUsersList);
   })
 
   socket.on("disconnect", () => {

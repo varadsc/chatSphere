@@ -10,8 +10,11 @@ export const LoginPage = () => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    Cookies.set('email' , values.email)
-    Cookies.set('name' , values.name)
+    // Cookies.set('email' , values.email)
+    // Cookies.set('name' , values.name)
+    Cookies.set('email' , 'hello@mail.com')
+    Cookies.set('name' , 'hello')
+
     navigate('/chat')
   };
 
