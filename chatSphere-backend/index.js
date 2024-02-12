@@ -46,6 +46,9 @@ io.on("connection" ,(socket) => {
   })
 
   socket.on("disconnect", () => {
+    // const RemovedUserList = connectedUsersList.filter((el) => el.id === socket.id)
+    const result = connectedUsersList.filter(obj => obj.id != socket.id);
+    connectedUsersList = result;
     console.log("User Disconnected", socket.id);
   });
 
