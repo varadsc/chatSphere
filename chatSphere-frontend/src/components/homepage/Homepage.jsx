@@ -23,12 +23,12 @@ export const Homepage = ({messages, setMessages}) => {
   useEffect(() => {
     newSocket?.on("connect" , () => {
       const UserData = {
-        'email'  :Cookies.get('email'),
-        'name' :Cookies.get('name'),
+        'email' :Cookies.get('email'),
+        'name'  :Cookies.get('name'),
         'id' : newSocket.id,
       }
       // console.log('socket with data ' , UserData);
-      newSocket.emit('add-connected-user', UserData )
+      newSocket.emit('add-connected-user', UserData)
     })
 
     newSocket?.on('send-message' , (message) => {
@@ -36,8 +36,9 @@ export const Homepage = ({messages, setMessages}) => {
       setMessages((messages) => [...messages, message]);
     })
 
-    newSocket.on('send-all-users' , (ConnectedUserList) => {
-      dispatch(updateActiveUsers(ConnectedUserList));
+    newSocket?.on('send-all-users' , (ConnectedUserList) => {
+      const UsersExceptSelf = filterById(ConnectedUserList, Cookies.get('email'))
+      dispatch(updateActiveUsers(UsersExceptSelf));
     })
 
     return () => {
@@ -45,6 +46,10 @@ export const Homepage = ({messages, setMessages}) => {
     };
 
   }, [])
+
+  const filterById = (array, email) =>  {
+    return array.filter(obj => obj.email !== email);
+  }
 
   // useEffect(() => {
   //   console.log('message is  , ', messages);
