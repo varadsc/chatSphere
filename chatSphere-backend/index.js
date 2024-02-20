@@ -42,7 +42,7 @@ io.on("connection" ,(socket) => {
   socket.on('add-connected-user', (userInfo) => {
     connectedUsersList.push(userInfo)
     console.log(connectedUsersList, 'list');
-    socket.emit('send-all-users', connectedUsersList);
+    io.emit('send-all-users', connectedUsersList);
   })
 
   socket.on("disconnect", () => {
