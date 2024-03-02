@@ -34,9 +34,8 @@ io.on("connection" ,(socket) => {
   console.log('new client created with ' , socket.id);
   // socket.emit('socket-connected ' , socket.id);
 
-  socket.on('get-message', (message) => {
-    console.log('sent by' , socket.id);
-    socket.broadcast.emit('send-message' ,message)
+  socket.on('send-msg-socket', (messageData) => {
+    socket.to(messageData.recieverId).emit('get-msg-socket' ,messageData.message)
   })
 
   socket.on('add-connected-user', (userInfo) => {

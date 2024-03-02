@@ -3,7 +3,7 @@ import { ChatHeader } from '../chatHeading/ChatHeader'
 import { ChatFooter } from '../chatFooter/ChatFooter'
 import { ChatBody } from '../chatBody/ChatBody'
 import { io } from "socket.io-client";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie';
 import { updateActiveUsers } from '../../redux/slices/ConnectedUserSlice';
 
@@ -15,6 +15,8 @@ export const Homepage = ({messages, setMessages}) => {
   useEffect(() => {
     console.log('msssss' ,messages);
   }, [messages])
+
+  const ChatSelected = useSelector((state) => state.selectedId.value)
 
 
   const newSocket = useMemo(() => io('http://localhost:3300'),[])
@@ -31,7 +33,7 @@ export const Homepage = ({messages, setMessages}) => {
       newSocket.emit('add-connected-user', UserData)
     })
 
-    newSocket?.on('send-message' , (message) => {
+    newSocket?.on('get-msg-socket' , (message) => {
       console.log('recieved message ' , message);
       setMessages((messages) => [...messages, message]);
     })
@@ -58,13 +60,21 @@ export const Homepage = ({messages, setMessages}) => {
   return (
     <div className="d-flex h-100 flex-column m-0 p-0">
         {/* <div> */}
-            <ChatHeader />
-        {/* </div> */}
-        <ChatBody messages={messages} />       
-        
-        <div className='p-3' style={{position:'fixed', bottom :'0' ,width:'95%' }}>
-           <ChatFooter setMessages={setMessages} messages={messages} newSocket={newSocket}  />
+        {
+          ChatSelected ? 
+          <>
+                <ChatHeader />
+            <ChatBody messages={messages} />       
+            
+            <div className='p-3' style={{position:'fixed', bottom :'0' ,width:'95%' }}>
+              <ChatFooter setMessages={setMessages} messages={messages} newSocket={newSocket}  />
+            </div>
+          </>
+        :
+        <div className='p-5'>
+          Select a chat first
         </div>
+        }
     </div>
   )
 }

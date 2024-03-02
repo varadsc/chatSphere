@@ -42,6 +42,7 @@ export const LoginPage = () => {
               <Form.Item
                 // label="Username"
                 name="email"
+                initialValue={"user1@mail.com"}
                 rules={[
                   {
                     required: true,
@@ -49,12 +50,13 @@ export const LoginPage = () => {
                   },
                 ]}
               >
-                <Input  placeholder='enter Email' className='px-3 py-2' />
+                <Input   placeholder='enter Email' className='px-3 py-2' />
               </Form.Item>
 
               <Form.Item
                 // label="Username"
                 name="name"
+                initialValue={"user1"}
                 rules={[
                   {
                     required: true,
