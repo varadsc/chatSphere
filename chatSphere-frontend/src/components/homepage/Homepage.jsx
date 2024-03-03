@@ -33,9 +33,9 @@ export const Homepage = ({messages, setMessages}) => {
       newSocket.emit('add-connected-user', UserData)
     })
 
-    newSocket?.on('get-msg-socket' , (message) => {
-      console.log('recieved message ' , message);
-      setMessages((messages) => [...messages, message]);
+    newSocket?.on('get-msg-socket' , (messageData) => {
+      console.log('recieved message ' , messageData);
+      setMessages((messages) => [...messages, messageData.message]);
     })
 
     newSocket?.on('send-all-users' , (ConnectedUserList) => {

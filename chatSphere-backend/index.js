@@ -35,7 +35,7 @@ io.on("connection" ,(socket) => {
   // socket.emit('socket-connected ' , socket.id);
 
   socket.on('send-msg-socket', (messageData) => {
-    socket.to(messageData.recieverId).emit('get-msg-socket' ,messageData.message)
+    socket.to(messageData.recieverId).emit('get-msg-socket' ,messageData)
   })
 
   socket.on('add-connected-user', (userInfo) => {

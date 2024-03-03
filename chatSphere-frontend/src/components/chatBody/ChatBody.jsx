@@ -1,6 +1,31 @@
 import React from 'react'
+import Styles from './ChatBody.module.css'
 
-export const ChatBody = ({messages}) => {
+export const ChatBody = () => {
+
+  const messages = [
+    {"message":"Hello","issent":true,"time":"08:24"},
+    {"message":"How are you?","issent":false,"time":"15:09"},
+    {"message":"Good morning!","issent":true,"time":"12:37"},
+    {"message":"Have a nice day!","issent":true,"time":"19:52"},
+    {"message":"Greetings!","issent":true,"time":"01:11"},
+    {"message":"What's up?","issent":false,"time":"03:42"},
+    {"message":"Nice to meet you!","issent":false,"time":"16:58"},
+    {"message":"See you later!","issent":false,"time":"17:46"},
+    {"message":"Hi there!","issent":true,"time":"22:34"},
+    {"message":"Long time no see!","issent":true,"time":"14:39"},
+    {"message":"Hey!","issent":true,"time":"11:21"},
+    {"message":"Take care!","issent":false,"time":"06:57"},
+    {"message":"Hola!","issent":false,"time":"09:33"},
+    {"message":"Howdy!","issent":false,"time":"20:58"},
+    {"message":"Bonjour!","issent":true,"time":"00:25"},
+    {"message":"Ciao!","issent":true,"time":"05:19"},
+    {"message":"Salut!","issent":true,"time":"13:07"},
+    {"message":"Shalom!","issent":false,"time":"23:13"},
+    {"message":"Namaste!","issent":false,"time":"10:52"},
+    {"message":"Guten Tag!","issent":false,"time":"18:06"}
+]
+
   return (
     <div  style={{flex: 1,  padding:'1rem',  marginBottom :'128px',  overflowY: 'auto'}}>
 
@@ -10,10 +35,22 @@ export const ChatBody = ({messages}) => {
       </div> */}
 
       {messages?.map((el) => (
-        <div>
-          <p>{el}</p>
-          {/* <p>{el.id}</p> */}
-        </div>
+        <>
+        {el.issent ? 
+          <div className='d-flex justify-content-end my-4 mx-1'>
+            <div className={`px-1 py-2  ${Styles.sentMsg}`} >
+              {el.message} and <sub> {el.time}  </sub> 
+            </div>
+          </div>
+          :
+          <div className='d-flex justify-content-start my-4 mx-1'>
+            <div className={`px-1 py-2  ${Styles.recievedMsg}`} >
+              {el.message} and <sub> {el.time}  </sub> 
+            </div>
+          </div>
+
+      }
+        </>
       ))}
 
  

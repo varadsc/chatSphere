@@ -1,0 +1,15 @@
+.sentMsg
+{
+    max-width: 50%;
+    background-color: #DFE2E7;
+    border-radius: 0.3rem;
+    border-top-right-radius: 0.1rem;
+}
+
+.recievedMsg
+{
+    max-width: 50%;
+    background-color: #F5F6F8;
+    border-radius: 0.3rem;
+    border-top-left-radius: 0.1rem;
+}
