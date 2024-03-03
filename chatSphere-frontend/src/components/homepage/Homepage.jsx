@@ -6,15 +6,13 @@ import { io } from "socket.io-client";
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie';
 import { updateActiveUsers } from '../../redux/slices/ConnectedUserSlice';
+import { updateMessages } from '../../redux/slices/Messages';
 
-export const Homepage = ({messages, setMessages}) => {
+export const Homepage = ({}) => {
 
   // const [messageInput, setMessageInput] =useState('')'
   // const [messages,setMessages] = useState();
 
-  useEffect(() => {
-    console.log('msssss' ,messages);
-  }, [messages])
 
   const ChatSelected = useSelector((state) => state.selectedId.value)
 
@@ -35,7 +33,16 @@ export const Homepage = ({messages, setMessages}) => {
 
     newSocket?.on('get-msg-socket' , (messageData) => {
       console.log('recieved message ' , messageData);
-      setMessages((messages) => [...messages, messageData.message]);
+
+      const gloabalMsgData = {
+        id : messageData.senderId,
+        message  : messageData.message,
+        time : messageData.time,
+        issent : false
+      }
+      dispatch(updateMessages(gloabalMsgData));
+
+      // setMessages((messages) => [...messages, messageData.message]);
     })
 
     newSocket?.on('send-all-users' , (ConnectedUserList) => {
@@ -44,7 +51,7 @@ export const Homepage = ({messages, setMessages}) => {
     })
 
     return () => {
-      socket.disconnect();
+      newSocket.disconnect();
     };
 
   }, [])
@@ -64,10 +71,10 @@ export const Homepage = ({messages, setMessages}) => {
           ChatSelected ? 
           <>
                 <ChatHeader />
-            <ChatBody messages={messages} />       
+            <ChatBody />       
             
             <div className='p-3' style={{position:'fixed', bottom :'0' ,width:'95%' }}>
-              <ChatFooter setMessages={setMessages} messages={messages} newSocket={newSocket}  />
+              <ChatFooter newSocket={newSocket}  />
             </div>
           </>
         :

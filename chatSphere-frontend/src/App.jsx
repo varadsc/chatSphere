@@ -18,7 +18,7 @@ function App() {
   // const [channels, setChannels] = useState([])
   // const [channel, setChannel] = useState('')
   // const [socket, setSocket] = useState(null);
-  const [messages, setMessages] =useState([])
+
   
   // const newSocket = useMemo(() => io('http://localhost:3300'))
   
@@ -49,7 +49,7 @@ function App() {
         {/* <Route path='/trial/chat' element={<ChatComponent socket={socket} setSocket={setSocket} loadChannels={loadChannels}  channels={channels} setChannels={setChannels} channel={channel} setChannel={setChannel} />}></Route> */}
 
         <Route path='/' element={<PageLayout />}>
-            <Route path='/chat' element={<Homepage messages={messages} setMessages={setMessages} />}></Route>
+            <Route path='/chat' element={<Homepage />}></Route>
             <Route path="/about" element={<>welcome to Home page</>}></Route>  
         </Route>
 
