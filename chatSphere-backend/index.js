@@ -7,21 +7,23 @@ const cors = require("cors");
 const PORT = 3300;
 
 const app = express();
+app.use(cors());
 
 const server = createServer(app);
 
 let connectedUsersList = [];
 
-const io = new Server(server , {
-  cors: {
-    origin: ['https://chat-sphere-frontend.vercel.app/' ,'http://localhost:5173', 'http://localhost:5174' ], 
-    methods: ['GET', 'POST'],
-    // credentials:true,
-  },
-})
+const io = new Server(server
+//    , {
+//   cors: {
+//     origin: ['https://chat-sphere-frontend.vercel.app/' ,'http://localhost:5173', 'http://localhost:5174' ], 
+//     methods: ['GET', 'POST'],
+//     // credentials:true,
+//   },
+// }
+)
 
 // can refer git code if gives error 
-app.use(cors());
 
 app.get('/' , (req,res) => {
   res.send('Backend Code Running smooth');
