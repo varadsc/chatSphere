@@ -20,11 +20,11 @@ export const Homepage = ({}) => {
   // const newSocket = useMemo(() => io('http://localhost:3300'),[])
   const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/' , 
   {
-    transports: ["websocket"],
+    transports: ["polling"],
         // reconnectionDelay: 1000,
         // reconnection: true,
         // reconnectionAttempts: 10,
-        transports: ["websocket", "polling"],
+        // transports: ["websocket", "polling"],
         // agent: false,
         // upgrade: false,
         // rejectUnauthorized: false
