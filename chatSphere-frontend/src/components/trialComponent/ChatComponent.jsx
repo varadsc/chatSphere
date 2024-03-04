@@ -7,7 +7,8 @@ import axios from 'axios';
 // import io from 'socket.io-client';
 import socketClient from "socket.io-client";
 
-const SERVER = 'http://localhost:3300';
+// const SERVER = 'http://localhost:3300';
+const SERVER = 'https://chat-sphere-backend.vercel.app/';
 
 export const ChatComponent = ({channels,setChannels, channel, setChannel, socket, setSocket}) => {
 
