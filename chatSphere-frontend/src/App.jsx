@@ -1,33 +1,59 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
+import {Route, Routes} from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { PageLayout } from './layouts/PageLayout'
+import { Homepage } from './components/homepage/Homepage'
+import { TrialComponent } from './components/trialComponent/TrialComponent'
+import { ChannelListComponent } from './components/trialComponent/ChannelListComponent'
+import { ChannelComponent } from './components/trialComponent/ChannelComponent'
+import { ChatComponent } from './components/trialComponent/ChatComponent'
+import axios from 'axios'
+// import { io } from "socket.io-client";
+import { LoginPage } from './pages/LoginPage'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  // const [channels, setChannels] = useState([])
+  // const [channel, setChannel] = useState('')
+  // const [socket, setSocket] = useState(null);
+
+  
+  // const newSocket = useMemo(() => io('http://localhost:3300'))
+  
+
+  // useEffect(() => {
+  //   console.log('msss' , messages);
+  // }, [messages])
+
+
+  // const messages = useRef([]);
+  
+
+  // const loadChannels = async() => {
+  //   const res = await axios.get('http://localhost:3300/getChannels');
+  //   setChannels(res.data.channels)
+  // }
+  //   useEffect(() => {
+  //     loadChannels();
+  //   }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/signup" element={<>welcome to signup page</>}></Route>
+        {/* <Route path='/trial/channel' element={<ChannelComponent />}></Route> */}
+        {/* <Route path='/trial/channelList' element={<ChannelListComponent />}></Route> */}
+        {/* <Route path='/trial/chat' element={<ChatComponent socket={socket} setSocket={setSocket} loadChannels={loadChannels}  channels={channels} setChannels={setChannels} channel={channel} setChannel={setChannel} />}></Route> */}
+
+        <Route path='/' element={<PageLayout />}>
+            <Route path='/chat' element={<Homepage />}></Route>
+            <Route path="/about" element={<>welcome to Home page</>}></Route>  
+        </Route>
+
+      </Routes>
     </>
   )
 }
