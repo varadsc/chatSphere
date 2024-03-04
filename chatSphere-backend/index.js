@@ -16,7 +16,8 @@ let connectedUsersList = [];
 const io = new Server(server
    , {
   cors: {
-    origin: ['https://chat-sphere-frontend.vercel.app' , 'https://chat-sphere-frontend.vercel.app/' ,'http://localhost:5173', 'http://localhost:5174' ], 
+    // origin: ['https://chat-sphere-frontend.vercel.app' , 'https://chat-sphere-frontend.vercel.app/' ,'http://localhost:5173', 'http://localhost:5174' ], 
+    origin: '*',
     methods: ['GET', 'POST'],
     // credentials:true,
   },
