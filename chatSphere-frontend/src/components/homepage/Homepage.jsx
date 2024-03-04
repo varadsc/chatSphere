@@ -18,7 +18,10 @@ export const Homepage = ({}) => {
 
 
   // const newSocket = useMemo(() => io('http://localhost:3300'),[])
-  const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/'),[])
+  const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/' , 
+  {
+    transports: ["websocket"],
+  }),[])
   const dispatch  = useDispatch();
 
   useEffect(() => {
