@@ -21,13 +21,13 @@ export const Homepage = ({}) => {
   const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/' , 
   {
     transports: ["websocket"],
-        reconnectionDelay: 1000,
-        reconnection: true,
-        reconnectionAttempts: 10,
-        transports: ["websocket"],
-        agent: false,
-        upgrade: false,
-        rejectUnauthorized: false
+        // reconnectionDelay: 1000,
+        // reconnection: true,
+        // reconnectionAttempts: 10,
+        transports: ["websocket", "polling"],
+        // agent: false,
+        // upgrade: false,
+        // rejectUnauthorized: false
   }),[])
   const dispatch  = useDispatch();
 
