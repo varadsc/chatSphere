@@ -17,11 +17,18 @@ export const Homepage = ({}) => {
   const ChatSelected = useSelector((state) => state.selectedId.value)
 
 
-  const newSocket = useMemo(() => io('http://localhost:3300'),[])
-  // const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/' , 
-  // {
-  //   transports: ["websocket"],
-  // }),[])
+  // const newSocket = useMemo(() => io('http://localhost:3300'),[])
+  const newSocket = useMemo(() => io('https://chat-sphere-backend.vercel.app/' , 
+  {
+    transports: ["websocket"],
+        reconnectionDelay: 1000,
+        reconnection: true,
+        reconnectionAttempts: 10,
+        transports: ["websocket"],
+        agent: false,
+        upgrade: false,
+        rejectUnauthorized: false
+  }),[])
   const dispatch  = useDispatch();
 
   useEffect(() => {
